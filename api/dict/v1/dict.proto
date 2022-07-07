@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package api.dict.v1;
+
+import "google/api/annotations.proto";
+import "validate/validate.proto";
+
+option go_package = "github.com/xiaohubai/rpc-layout/api/dict/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.dict.v1";
+
+service Dict {
+  rpc Get(DictRequest) returns (DictResponse) {
+    option (google.api.http) = {
+      post : "/get/dict"
+      body : "*"
+    };
+  }
+}
+
+message DictRequest {
+  string tag = 1 [ (validate.rules).string = {min_len : 1} ];
+}
+
+// The response message containing the greetings
+message DictResponse {
+  string woker = 1;
+  string guide = 2;
+  string actor = 3;
+  string lawyer = 4;
+}
